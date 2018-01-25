@@ -223,7 +223,46 @@ body.tribe_events-template-default .type-page .post-header {
   margin-top: 1em;
 }
 
-/* line 5, ../scss/gordokube.scss */
+/* line 1, ../scss/_coworkers.scss */
+#loopsns-loop-306 {
+  font-size: .8em;
+}
+/* line 3, ../scss/_coworkers.scss */
+#loopsns-loop-306 .hentry {
+  text-align: justify;
+  background: rgba(0, 0, 0, 0.01);
+  padding: 20px;
+}
+/* line 7, ../scss/_coworkers.scss */
+#loopsns-loop-306 .hentry .loopsns-slide-title {
+  margin: .5em;
+  text-align: center;
+}
+/* line 11, ../scss/_coworkers.scss */
+#loopsns-loop-306 .hentry .gordokube-trombinou {
+  position: relative;
+  margin: 1em auto;
+  height: 8em;
+  width: 9em;
+  background: rgba(255, 255, 255, 0.8);
+}
+/* line 17, ../scss/_coworkers.scss */
+#loopsns-loop-306 .hentry .gordokube-trombinou:after {
+  content: "\f2c0";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  position: absolute;
+  font-size: 3em;
+  line-height: 2.5em;
+  z-index: 1;
+  opacity: .1;
+  width: 100%;
+  text-align: center;
+}
+
+/* line 6, ../scss/gordokube.scss */
 .grid-hentries .hentry {
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
@@ -233,34 +272,34 @@ body.tribe_events-template-default .type-page .post-header {
   -webkit-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-/* line 8, ../scss/gordokube.scss */
+/* line 9, ../scss/gordokube.scss */
 .grid-hentries .hentry:hover {
   -moz-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125), 0 10px 10px rgba(0, 0, 0, 0.11);
   -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125), 0 10px 10px rgba(0, 0, 0, 0.11);
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125), 0 10px 10px rgba(0, 0, 0, 0.11);
 }
 
-/* line 14, ../scss/gordokube.scss */
+/* line 15, ../scss/gordokube.scss */
 .widget {
   /*MailChimp*/
 }
-/* line 16, ../scss/gordokube.scss */
+/* line 17, ../scss/gordokube.scss */
 .widget .mc4wp-form {
   text-align: center;
 }
-/* line 18, ../scss/gordokube.scss */
+/* line 19, ../scss/gordokube.scss */
 .widget .mc4wp-form label {
   display: none;
 }
 
-/* line 27, ../scss/gordokube.scss */
+/* line 28, ../scss/gordokube.scss */
 body.home #loopsns-loop-232 {
   position: absolute;
   left: 0;
   background: rgba(0, 0, 0, 0.02);
   bottom: 0;
 }
-/* line 32, ../scss/gordokube.scss */
+/* line 33, ../scss/gordokube.scss */
 body.home #loopsns-loop-232 .owl-dots {
   position: absolute;
   width: 100%;
@@ -268,49 +307,49 @@ body.home #loopsns-loop-232 .owl-dots {
   margin-bottom: 10px;
   height: 2em;
 }
-/* line 39, ../scss/gordokube.scss */
+/* line 40, ../scss/gordokube.scss */
 body.home #loopsns-loop-232 .hentry {
   height: 250px;
 }
-/* line 42, ../scss/gordokube.scss */
+/* line 43, ../scss/gordokube.scss */
 body.home #loopsns-loop-232 .hentry figure img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=25);
   opacity: 0.25;
 }
-/* line 45, ../scss/gordokube.scss */
+/* line 46, ../scss/gordokube.scss */
 body.home #loopsns-loop-232 .hentry figure figcaption {
   background: none;
   border: none;
 }
-/* line 50, ../scss/gordokube.scss */
+/* line 51, ../scss/gordokube.scss */
 body.home #loopsns-loop-232 .hentry .loopsns-slide-title {
   display: inline;
 }
-/* line 53, ../scss/gordokube.scss */
+/* line 54, ../scss/gordokube.scss */
 body.home #loopsns-loop-232 .hentry p {
   display: inline;
 }
-/* line 58, ../scss/gordokube.scss */
+/* line 59, ../scss/gordokube.scss */
 body.home .content > .hentry {
   padding-bottom: calc(250px + 2em);
 }
 
-/* line 66, ../scss/gordokube.scss */
+/* line 67, ../scss/gordokube.scss */
 #post-69 .loopsns-loop.loopsns-gallery, #post-318 .loopsns-loop.loopsns-gallery {
   width: 120%;
   left: -10%;
   margin-top: -10%;
 }
-/* line 70, ../scss/gordokube.scss */
+/* line 71, ../scss/gordokube.scss */
 #post-69 .loopsns-loop.loopsns-gallery .hentry, #post-318 .loopsns-loop.loopsns-gallery .hentry {
   height: 350px;
 }
-/* line 72, ../scss/gordokube.scss */
+/* line 73, ../scss/gordokube.scss */
 #post-69 .loopsns-loop.loopsns-gallery .hentry figcaption, #post-318 .loopsns-loop.loopsns-gallery .hentry figcaption {
   display: none;
 }
 
-/* line 81, ../scss/gordokube.scss */
+/* line 82, ../scss/gordokube.scss */
 .action-button, .tribe-events-widget-link a {
   padding: 12px 16px;
   margin: 0;
@@ -322,28 +361,28 @@ body.home .content > .hentry {
   -webkit-appearance: none;
   border-radius: 3px;
 }
-/* line 91, ../scss/gordokube.scss */
+/* line 92, ../scss/gordokube.scss */
 .action-button:hover, .tribe-events-widget-link a:hover {
   cursor: pointer;
   background: #13C4A5;
   color: #fff;
 }
 
-/* line 97, ../scss/gordokube.scss */
+/* line 98, ../scss/gordokube.scss */
 a.action-button, .tribe-events-widget-link a {
   display: inline-block;
   text-underline: none;
 }
-/* line 100, ../scss/gordokube.scss */
+/* line 101, ../scss/gordokube.scss */
 a.action-button:hover, .tribe-events-widget-link a:hover {
   text-underline: none;
 }
 
-/* line 109, ../scss/gordokube.scss */
+/* line 110, ../scss/gordokube.scss */
 .footer .widget#linkcat-27 .widget-title {
   display: none;
 }
-/* line 114, ../scss/gordokube.scss */
+/* line 115, ../scss/gordokube.scss */
 .footer .widget#widget-text-3 a.action-button, .footer .widget#widget-text-3 .tribe-events-widget-link a, .tribe-events-widget-link .footer .widget#widget-text-3 a {
   min-width: 5em;
 }

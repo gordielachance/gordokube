@@ -1,0 +1,35 @@
+#loopsns-loop-306{
+    font-size:.8em;
+    .hentry{
+        text-align: justify;
+        background: rgba(0,0,0,0.01);
+        padding: 20px;
+        .loopsns-slide-title{
+            margin: .5em;
+            text-align: center;
+        }
+        .gordokube-trombinou{
+            position:relative;
+            margin : 1em auto;
+            height: 8em;
+            width: 9em;
+            background: rgba(255,255,255,0.8);
+            &:after{
+                content: "\f2c0";
+                font-family: FontAwesome;
+                font-style: normal;
+                font-weight: normal;
+                text-decoration: inherit;
+                position: absolute;
+                font-size: 3em;
+                line-height: 2.5em;
+                z-index: 1;
+                opacity: .1;
+                width: 100%;
+                text-align: center;
+                
+            }
+
+        }
+    }
+}
