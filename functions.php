@@ -59,23 +59,31 @@ class Gordokube{
     }
     
     function setup_actions(){
-        add_action('init', array($this,'register_coworkers_post_type') );
-        add_action('pre_get_posts', array($this,'include_blog_coworkers') );
+
         
         add_action( 'wp_enqueue_scripts', array($this,'scripts_styles') );
         add_action( 'admin_enqueue_scripts', array($this,'admin_scripts_styles') );
-        //add_filter( 'the_content', array($this,'page_calendar_content')); //TO FIX TO REMOVE? no more used
-        add_filter('gordo_get_hentry_icon', array($this,'get_hentry_event_icon'), 10, 2 );
+
+        /*
+        Coworkers
+        */
+        add_action('init', array($this,'register_coworkers_post_type') );
+        add_action('pre_get_posts', array($this,'home_include_coworkers') );
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_coworker_icon'), 10, 2 );
+        
+        /*
+        Events
+        */
+        //TO FIX sort events by start date?
+        add_filter('gordo_get_hentry_icon', array($this,'get_hentry_event_icon'), 10, 2 );
+        //add_filter( 'the_content', array($this,'page_calendar_content')); //TO FIX TO REMOVE? no more used
         add_filter('gordo_get_sidebar', array($this,'single_event_sidebar'));
         add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3);
-        
         add_filter('body_class', array($this,'calendar_view_class') );
         add_filter('post_class', array($this,'past_event_post_class') );
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
         add_action( 'parse_query', array($this,'events_parse_query'), 99 );
-        
         
     }
 	function scripts_styles() {
@@ -125,8 +133,9 @@ class Gordokube{
         ));
     }
     
-    function include_blog_coworkers( $query ) {
+    function home_include_coworkers( $query ) {
         if ( $query->is_main_query() && is_home() ) {
+            $query->query_vars['post_type']   = isset( $query->query_vars['post_type'] ) ? ( array ) $query->query_vars['post_type'] : array( 'post' );
             $query->query_vars['post_type'][] = self::$coworker_post_type;
         }
         return $query;
