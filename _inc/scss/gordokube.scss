@@ -118,3 +118,29 @@ a.action-button{
         }
     }
 }
+
+//KUBE
+#theme-credits{
+    display:none;
+}
+body{
+    background-color: white;
+    .footer{
+        background-color: snow;
+        .widget-title{
+            color:inherit;
+        }
+    }
+    .credits{
+        background-color: #f1f1f1;
+    }
+    &.archive,&.blog{
+        background-color: #f1f1f1;
+        
+    }
+
+    
+    .footer,.credits{
+
+    }
+}
