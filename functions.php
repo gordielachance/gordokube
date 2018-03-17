@@ -84,6 +84,9 @@ class Gordokube{
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
         add_action( 'parse_query', array($this,'events_parse_query'), 99 );
+        add_action( 'tribe_events_cost_table', array($this,'event_backend_open_price'), 9 );
+        add_action( 'tribe_events_event_save', array($this,'event_save_open_price'), 10, 3 );
+        add_filter( 'tribe_get_cost',array($this,"event_get_open_price"),10,3);
         
     }
 	function scripts_styles() {
@@ -192,6 +195,60 @@ class Gordokube{
             //$query->tribe_is_event_query = false;
         }
 
+    }
+  
+    
+    function event_backend_open_price($event_id){
+        $isOpenPrice = ($event_id) ? get_post_meta( $event_id, '_EventOpenPrice', true ) : false;
+        ?>
+        <tr>
+            <td><?php esc_html_e( 'Open Price:', 'labokube' ); ?></td>
+            <td>
+                <input
+                    tabindex="<?php tribe_events_tab_index(); ?>"
+                    type="checkbox"
+                    id="openPriceCheckbox"
+                    name="EventOpenPrice"
+                    value="1"
+                    <?php checked( $isOpenPrice ); ?>
+                />
+            </td>
+        </tr>
+			<tr>
+				<td></td>
+				<td>
+					<small><?php echo esc_html__( 'Use the price field above as a suggested price.', 'labokube' ); ?></small>
+				</td>
+			</tr>
+        <?php
+    }
+    
+    function event_save_open_price($event_id, $data, $event){
+        $isOpenPrice = isset($_POST['EventOpenPrice']);
+        
+        if ($isOpenPrice){
+            update_post_meta($event_id,'_EventOpenPrice',true);
+        }else{
+            delete_post_meta($event_id,'_EventOpenPrice');
+        }
+    }
+    
+    function event_get_open_price($cost, $event_id, $with_currency_symbol){
+        $isOpenPrice = get_post_meta( $event_id, '_EventOpenPrice', true );
+        if ($isOpenPrice){
+
+            if ( $cost == esc_html__( 'Free', 'the-events-calendar' ) ) $cost = null; //free
+            
+            if ($cost){
+                $suggested_txt = sprintf( '<small>' . __("suggested: %s","labokube") . '</small>',$cost );
+                $cost = sprintf(__("Open Price - %s","labokube"),$suggested_txt);
+            }else{
+                $cost = __("Open Price","labokube");
+            }
+            
+            
+        }
+        return $cost;
     }
 
     /*
