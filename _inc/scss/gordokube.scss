@@ -124,7 +124,6 @@ a.action-button{
     display:none;
 }
 body{
-    background-color: white;
     .footer{
         background-color: snow;
         .widget-title{
@@ -135,11 +134,10 @@ body{
         background-color: #f1f1f1;
     }
     &.archive,&.blog{
-        background-color: #f1f1f1;
+        background-color: #f1f1f1!important;
         
     }
 
-    
     .footer,.credits{
 
     }
