@@ -13,31 +13,29 @@
 /*
 Grid Posts
 */
-/* line 23, ../scss/_events.scss */
-body.post-type-archive-tribe_events .grid-hentries .hentry.tribe-events-past {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
-  opacity: 0.5;
-  -moz-transition: opacity 0.3s ease-in-out;
-  -o-transition: opacity 0.3s ease-in-out;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  transition: opacity 0.3s ease-in-out;
-}
-/* line 26, ../scss/_events.scss */
-body.post-type-archive-tribe_events .grid-hentries .hentry.tribe-events-past:hover {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-  opacity: 0.8;
+/* line 22, ../scss/_events.scss */
+body.post-type-archive-tribe_events .grid-hentries .hentry {
+  /*
+  &.tribe-events-past{
+      @include opacity(.5);
+      @include transition(opacity 0.3s ease-in-out);
+      &:hover{
+          @include opacity(.8);
+      }
+  }
+  */
 }
 
-/* line 34, ../scss/_events.scss */
+/* line 36, ../scss/_events.scss */
 .tribe-bar-disabled {
   display: none;
 }
 
-/* line 39, ../scss/_events.scss */
+/* line 41, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar {
   border: 1px solid #efefef;
 }
-/* line 41, ../scss/_events.scss */
+/* line 43, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar td {
   padding: .5em;
   border: 1px solid #efefef;
@@ -47,24 +45,24 @@ body.post-type-archive-tribe_events .grid-hentries .hentry.tribe-events-past:hov
   transition: all 0.1s ease-in-out;
   z-index: 1;
 }
-/* line 46, ../scss/_events.scss */
+/* line 48, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar td:hover {
   z-index: 2;
   -moz-box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
   -webkit-box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
 }
-/* line 51, ../scss/_events.scss */
+/* line 53, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar td.tribe-events-past {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=25);
   opacity: 0.25;
 }
-/* line 54, ../scss/_events.scss */
+/* line 56, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar td.tribe-events-present {
   border-color: #2B3542;
   border-width: 2px;
 }
-/* line 60, ../scss/_events.scss */
+/* line 62, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar .hentry {
   box-sizing: border-box;
   margin: 0;
@@ -73,11 +71,11 @@ body.post-type-archive-tribe_events .grid-hentries .hentry.tribe-events-past:hov
   display: flex;
   flex-flow: column;
 }
-/* line 66, ../scss/_events.scss */
+/* line 68, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar .hentry > * {
   flex: auto;
 }
-/* line 69, ../scss/_events.scss */
+/* line 71, ../scss/_events.scss */
 #tribe-events-content table.tribe-events-calendar .hentry .tribe-events-month-event-title {
   margin: 0;
 }
@@ -85,16 +83,16 @@ body.post-type-archive-tribe_events .grid-hentries .hentry.tribe-events-past:hov
 /*
 Calendar
 */
-/* line 80, ../scss/_events.scss */
+/* line 82, ../scss/_events.scss */
 body.events-gridview .post-header {
   display: none;
 }
-/* line 83, ../scss/_events.scss */
+/* line 85, ../scss/_events.scss */
 body.events-gridview .post-content {
   padding: 10%;
 }
 
-/* line 90, ../scss/_events.scss */
+/* line 92, ../scss/_events.scss */
 .tribe-events-tooltip .tribe-event-duration {
   text-align: center;
   border-bottom: 1px solid #DDD;
@@ -105,16 +103,16 @@ body.events-gridview .post-content {
 /*
 Single Event
 */
-/* line 103, ../scss/_events.scss */
+/* line 105, ../scss/_events.scss */
 body.tribe_events-template-default .type-page .post-header {
   display: none;
 }
 
-/* line 109, ../scss/_events.scss */
+/* line 111, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content ul.tribe-events-sub-nav {
   overflow: visible;
 }
-/* line 111, ../scss/_events.scss */
+/* line 113, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content ul.tribe-events-sub-nav a {
   /*
   //@extend .archive-nav a;//TO FIX
@@ -130,16 +128,16 @@ body.tribe_events-template-default .type-page .post-header {
   text-overflow: ellipsis;
   */
 }
-/* line 127, ../scss/_events.scss */
+/* line 129, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content #tribe-events-header {
   display: none;
 }
-/* line 130, ../scss/_events.scss */
+/* line 132, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content #tribe-events-footer {
   margin: 2em 0;
   overflow: visible;
 }
-/* line 136, ../scss/_events.scss */
+/* line 138, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-schedule h2 {
   margin: 0;
   padding: 0;
@@ -151,7 +149,7 @@ body.tribe_events-template-default .type-page .post-header {
   display: block;
   font-size: 1em;
 }
-/* line 150, ../scss/_events.scss */
+/* line 152, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-cost {
   position: absolute;
   top: 4.25em;
@@ -161,7 +159,7 @@ body.tribe_events-template-default .type-page .post-header {
   box-sizing: border-box;
   padding-right: 2em;
 }
-/* line 161, ../scss/_events.scss */
+/* line 163, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-event-meta {
   display: -webkit-flex;
   display: flex;
@@ -171,51 +169,51 @@ body.tribe_events-template-default .type-page .post-header {
   font-size: .8em;
   padding: 1em;
 }
-/* line 169, ../scss/_events.scss */
+/* line 171, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-event-meta address.tribe-events-address {
   display: inherit;
   /*override plugin CSS*/
   background: none;
   padding: 0;
 }
-/* line 175, ../scss/_events.scss */
+/* line 177, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-event-meta > .tribe-events-meta-group {
   flex: auto;
   width: 50%;
   box-sizing: border-box;
 }
-/* line 180, ../scss/_events.scss */
+/* line 182, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-event-meta > .tribe-events-meta-group.tribe-events-meta-group-gmap .tribe-events-venue-map {
   margin: 2em 0;
   background-color: #fcfcfc;
 }
-/* line 187, ../scss/_events.scss */
+/* line 189, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-cal-links {
   text-align: center;
   display: block;
   clear: both;
   margin: 2em 0;
 }
-/* line 192, ../scss/_events.scss */
+/* line 194, ../scss/_events.scss */
 .single-tribe_events #tribe-events-content .tribe-events-cal-links a {
   margin: 0 1em;
 }
 
-/* line 198, ../scss/_events.scss */
+/* line 200, ../scss/_events.scss */
 .tribe-events-list-widget ol {
   list-style: none;
 }
 
-/* line 203, ../scss/_events.scss */
+/* line 205, ../scss/_events.scss */
 #single-event-sidebar .tribe-events-cal-links {
   text-align: center;
 }
-/* line 205, ../scss/_events.scss */
+/* line 207, ../scss/_events.scss */
 #single-event-sidebar .tribe-events-cal-links a {
   margin: .125em auto;
 }
 
-/* line 211, ../scss/_events.scss */
+/* line 213, ../scss/_events.scss */
 .tribe-events-widget-link {
   text-align: center;
   display: block;
@@ -264,9 +262,6 @@ body.tribe_events-template-default .type-page .post-header {
 
 /* line 6, ../scss/gordokube.scss */
 .grid-hentries .hentry {
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.12);
   -moz-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   -o-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   -webkit-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -392,23 +387,19 @@ a.action-button:hover, .tribe-events-widget-link a:hover {
   display: none;
 }
 
-/* line 126, ../scss/gordokube.scss */
-body {
-  background-color: white;
-}
-/* line 128, ../scss/gordokube.scss */
+/* line 127, ../scss/gordokube.scss */
 body .footer {
   background-color: snow;
 }
-/* line 130, ../scss/gordokube.scss */
+/* line 129, ../scss/gordokube.scss */
 body .footer .widget-title {
   color: inherit;
 }
-/* line 134, ../scss/gordokube.scss */
+/* line 133, ../scss/gordokube.scss */
 body .credits {
   background-color: #f1f1f1;
 }
-/* line 137, ../scss/gordokube.scss */
+/* line 136, ../scss/gordokube.scss */
 body.archive, body.blog {
-  background-color: #f1f1f1;
+  background-color: #f1f1f1 !important;
 }

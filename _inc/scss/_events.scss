@@ -20,6 +20,7 @@ Grid Posts
 body.post-type-archive-tribe_events{
     .grid-hentries{
         .hentry{
+            /*
             &.tribe-events-past{
                 @include opacity(.5);
                 @include transition(opacity 0.3s ease-in-out);
@@ -27,6 +28,7 @@ body.post-type-archive-tribe_events{
                     @include opacity(.8);
                 }
             }
+            */
         }
     }
 }
