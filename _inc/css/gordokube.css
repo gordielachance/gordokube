@@ -368,20 +368,23 @@ a.action-button:hover, .tribe-events-widget-link a:hover {
   min-width: 5em;
 }
 
-/* line 113, ../scss/gordokube.scss */
-#theme-credits {
+/* line 116, ../scss/gordokube.scss */
+body.home.page .post-header {
   display: none;
 }
-
-/* line 117, ../scss/gordokube.scss */
+/* line 120, ../scss/gordokube.scss */
 body .footer {
   background-color: snow;
 }
-/* line 119, ../scss/gordokube.scss */
+/* line 122, ../scss/gordokube.scss */
 body .footer .widget-title {
   color: inherit;
 }
-/* line 123, ../scss/gordokube.scss */
+/* line 126, ../scss/gordokube.scss */
 body .credits {
   background-color: #f1f1f1;
+}
+/* line 129, ../scss/gordokube.scss */
+body #theme-credits {
+  display: none;
 }

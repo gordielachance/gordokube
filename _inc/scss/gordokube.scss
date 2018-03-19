@@ -110,10 +110,13 @@ a.action-button{
 }
 
 //KUBE
-#theme-credits{
-    display:none;
-}
 body{
+    //no title on home page
+    &.home.page{
+        .post-header{
+            display:none;
+        }
+    }
     .footer{
         background-color: snow;
         .widget-title{
@@ -123,8 +126,7 @@ body{
     .credits{
         background-color: #f1f1f1;
     }
-
-    .footer,.credits{
-
+    #theme-credits{
+        display:none;
     }
 }
