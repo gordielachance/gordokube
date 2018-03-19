@@ -26,4 +26,3 @@ global $loopsns_loop;
 
 }
 ?>
-TOTO
