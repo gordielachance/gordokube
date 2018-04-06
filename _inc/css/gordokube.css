@@ -315,22 +315,36 @@ body.home .content > .hentry {
   padding-bottom: calc(250px + 2em);
 }
 
-/* line 57, ../scss/gordokube.scss */
+/* line 55, ../scss/gordokube.scss */
+.posts .hentry {
+  -moz-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -o-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+/* line 58, ../scss/gordokube.scss */
+.posts .hentry:hover {
+  -moz-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125), 0 10px 10px rgba(0, 0, 0, 0.11);
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125), 0 10px 10px rgba(0, 0, 0, 0.11);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125), 0 10px 10px rgba(0, 0, 0, 0.11);
+}
+
+/* line 67, ../scss/gordokube.scss */
 #post-69 .loopsns-loop.loopsns-gallery, #post-318 .loopsns-loop.loopsns-gallery {
   width: 120%;
   left: -10%;
   margin-top: -10%;
 }
-/* line 61, ../scss/gordokube.scss */
+/* line 71, ../scss/gordokube.scss */
 #post-69 .loopsns-loop.loopsns-gallery .hentry, #post-318 .loopsns-loop.loopsns-gallery .hentry {
   height: 350px;
 }
-/* line 63, ../scss/gordokube.scss */
+/* line 73, ../scss/gordokube.scss */
 #post-69 .loopsns-loop.loopsns-gallery .hentry figcaption, #post-318 .loopsns-loop.loopsns-gallery .hentry figcaption {
   display: none;
 }
 
-/* line 72, ../scss/gordokube.scss */
+/* line 82, ../scss/gordokube.scss */
 .action-button, .tribe-events-widget-link a {
   padding: 12px 16px;
   margin: 0;
@@ -342,49 +356,54 @@ body.home .content > .hentry {
   -webkit-appearance: none;
   border-radius: 3px;
 }
-/* line 82, ../scss/gordokube.scss */
+/* line 92, ../scss/gordokube.scss */
 .action-button:hover, .tribe-events-widget-link a:hover {
   cursor: pointer;
   background: #13C4A5;
   color: #fff;
 }
 
-/* line 88, ../scss/gordokube.scss */
+/* line 98, ../scss/gordokube.scss */
 a.action-button, .tribe-events-widget-link a {
   display: inline-block;
   text-underline: none;
 }
-/* line 91, ../scss/gordokube.scss */
+/* line 101, ../scss/gordokube.scss */
 a.action-button:hover, .tribe-events-widget-link a:hover {
   text-underline: none;
 }
 
-/* line 100, ../scss/gordokube.scss */
+/* line 110, ../scss/gordokube.scss */
 .footer .widget#linkcat-27 .widget-title {
   display: none;
 }
-/* line 105, ../scss/gordokube.scss */
+/* line 115, ../scss/gordokube.scss */
 .footer .widget#widget-text-3 a.action-button, .footer .widget#widget-text-3 .tribe-events-widget-link a, .tribe-events-widget-link .footer .widget#widget-text-3 a {
   min-width: 5em;
 }
 
-/* line 116, ../scss/gordokube.scss */
+/* line 123, ../scss/gordokube.scss */
+.bg-page {
+  background-color: #fff2f2;
+}
+
+/* line 130, ../scss/gordokube.scss */
 body.home.page .post-header {
   display: none;
 }
-/* line 120, ../scss/gordokube.scss */
+/* line 134, ../scss/gordokube.scss */
 body .footer {
   background-color: #fafafa;
 }
-/* line 122, ../scss/gordokube.scss */
+/* line 136, ../scss/gordokube.scss */
 body .footer .widget-title {
   color: inherit;
 }
-/* line 126, ../scss/gordokube.scss */
+/* line 140, ../scss/gordokube.scss */
 body .credits {
   background-color: #f1f1f1;
 }
-/* line 129, ../scss/gordokube.scss */
+/* line 143, ../scss/gordokube.scss */
 body #theme-credits {
   display: none;
 }
