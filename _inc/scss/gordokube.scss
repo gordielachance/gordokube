@@ -51,6 +51,16 @@ body.home{
     }
 }
 
+.posts{
+    .hentry{
+        //@include box-shadow(0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12));
+        @include transition(box-shadow 0.3s cubic-bezier(.25,.8,.25,1));
+        &:hover {
+            @include box-shadow(0 14px 28px rgba(0,0,0,0.125), 0 10px 10px rgba(0,0,0,0.11));
+        }
+    }
+}
+
 #post-69,#post-318{ //"coworking - location"
 
     .loopsns-loop{
@@ -109,8 +119,12 @@ a.action-button{
     }
 }
 
-//KUBE
+//KUBE COLOR SCHEME
+.bg-page{
+    background-color:#fff2f2;
+}
 body{
+    
     //no title on home page
     &.home.page{
         .post-header{
