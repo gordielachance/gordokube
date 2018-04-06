@@ -68,8 +68,10 @@ class Gordokube{
         Coworkers
         */
         add_action('init', array($this,'register_coworkers_post_type') );
+        add_action('init', array($this,'add_kubist_role') );
         add_action('pre_get_posts', array($this,'home_include_coworkers') );
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_coworker_icon'), 10, 2 );
+        
         
         /*
         Events
@@ -134,6 +136,18 @@ class Gordokube{
             ),
             'taxonomies' => array('post_tag' ),
         ));
+    }
+    
+    /*
+    This does not add a new role but renames "contributor" to "kubist".
+    */
+    function add_kubist_role(){
+        global $wp_roles;
+
+        if ( ! isset( $wp_roles ) )
+            $wp_roles = new WP_Roles();
+        
+        $wp_roles->roles['contributor']['name'] = $wp_roles->role_names['contributor'] = __('Kubist','gordokube');  
     }
     
     function home_include_coworkers( $query ) {
