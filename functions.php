@@ -89,6 +89,8 @@ class Gordokube{
         add_action( 'tribe_events_cost_table', array($this,'event_backend_open_price'), 9 );
         add_action( 'tribe_events_event_save', array($this,'event_save_open_price'), 10, 3 );
         add_filter( 'tribe_get_cost',array($this,"event_get_open_price"),10,3);
+        add_action( 'gordo_archives_menu', array($this,'events_add_archive_filters_link') );
+
         
     }
 	function scripts_styles() {
@@ -263,6 +265,26 @@ class Gordokube{
             
         }
         return $cost;
+    }
+    
+    /*
+    Add 'Events' link (The Events Calendar) to the archives menu
+    */
+    function events_add_archive_filters_link($has_menu){
+        
+        if ( $has_menu ) return;
+        if ( !class_exists('Tribe__Events__Main') ) return;
+        
+        $link = get_permalink( get_option( 'page_for_posts' ) );
+        $link = add_query_arg(array('post_type'=>'tribe_events'),$link);
+        $is_active = ( get_post_type() == 'tribe_events' );
+        $classes = array(
+            $is_active ? 'current-cat' : null
+        );
+        $classes = array_filter($classes);
+        $classes_str = $classes ? sprintf(' class="%s"',implode(' ',$classes)) : null;
+        
+        printf('<li %s><a href="%s">%s</a></li>',$classes_str,$link,__('Events', 'the-events-calendar'));
     }
 
     /*
