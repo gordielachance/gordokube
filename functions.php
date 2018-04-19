@@ -271,7 +271,7 @@ class Gordokube{
     Add 'Events' link (The Events Calendar) to the archives menu
     */
     function events_add_archive_filters_link($has_menu){
-        
+
         if ( $has_menu ) return;
         if ( !class_exists('Tribe__Events__Main') ) return;
         
@@ -279,6 +279,7 @@ class Gordokube{
         $link = add_query_arg(array('post_type'=>'tribe_events'),$link);
         $is_active = ( get_post_type() == 'tribe_events' );
         $classes = array(
+            'cat-item',
             $is_active ? 'current-cat' : null
         );
         $classes = array_filter($classes);
