@@ -81,7 +81,7 @@ class Gordokube{
         //add_filter( 'the_content', array($this,'page_calendar_content')); //TO FIX TO REMOVE? no more used
         add_filter('gordo_get_sidebar', array($this,'single_event_sidebar'));
         add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3);
-        add_filter('body_class', array($this,'calendar_view_class') );
+        add_filter('body_class', array($this,'events_body_classes') );
         add_filter('post_class', array($this,'past_event_post_class') );
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
@@ -347,7 +347,14 @@ class Gordokube{
         return false;
     }
     
-    function calendar_view_class($classes){
+    function events_body_classes($classes){
+        $post_type = get_post_type();
+        if ( $post_type == 'tribe_events' ){
+            if ( !is_single() ){
+                $classes[] = "archive";
+            }
+        }
+
         return $classes;
     }
     
