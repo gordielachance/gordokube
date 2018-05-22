@@ -51,6 +51,16 @@ body.home{
     }
 }
 
+.hentry{
+    &.kubist-restrict{
+        .post-title:before{
+            font-family: FontAwesome;
+            content: "\f023";
+            padding-right:.1em;
+        }
+    }
+}
+
 .posts{
     .hentry{
         //@include box-shadow(0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12));

@@ -13,6 +13,7 @@ class Gordokube{
     
     static $calendar_page_id = 67;
     static $coworker_post_type = 'coworker';
+    static $kubist_restrict_metaname = '_kubist_restrict';
     
     /** Version ***************************************************************/
     /**
@@ -71,8 +72,11 @@ class Gordokube{
         add_action('init', array($this,'add_kubist_role') );
         add_action('pre_get_posts', array($this,'home_include_coworkers') );
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_coworker_icon'), 10, 2 );
-        
-        
+        add_action('post_submitbox_misc_actions', array($this,'kubist_restrict_checkbox') );
+        add_action('save_post', array($this,'kubist_restrict_save') );
+        add_action('pre_get_posts', array($this,'kubist_restrict_query') );
+        add_filter('post_class', array($this,'kubist_restrict_class') );
+
         /*
         Events
         */
@@ -80,16 +84,24 @@ class Gordokube{
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_event_icon'), 10, 2 );
         //add_filter( 'the_content', array($this,'page_calendar_content')); //TO FIX TO REMOVE? no more used
         add_filter('gordo_get_sidebar', array($this,'single_event_sidebar'));
-        add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3);
+        
         add_filter('body_class', array($this,'events_body_classes') );
         add_filter('post_class', array($this,'past_event_post_class') );
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
         add_action( 'parse_query', array($this,'events_parse_query'), 99 );
+        add_action( 'gordo_archives_menu', array($this,'events_add_archive_filters_link') );
+        
+        //time
+        add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3); //update post date = event start date so less confusing
+        
+        //open price
         add_action( 'tribe_events_cost_table', array($this,'event_backend_open_price'), 9 );
         add_action( 'tribe_events_event_save', array($this,'event_save_open_price'), 10, 3 );
         add_filter( 'tribe_get_cost',array($this,"event_get_open_price"),10,3);
-        add_action( 'gordo_archives_menu', array($this,'events_add_archive_filters_link') );
+        
+        
+        
 
     }
 
@@ -151,6 +163,70 @@ class Gordokube{
             $wp_roles = new WP_Roles();
         
         $wp_roles->roles['contributor']['name'] = $wp_roles->role_names['contributor'] = __('Kubist','gordokube');  
+    }
+    
+    function kubist_restrict_checkbox(){
+        $post_id = get_the_ID();
+        $cannot_restrict_types = array();
+
+        if ( in_array(get_post_type($post_id),$cannot_restrict_types) ) {
+            return;
+        }
+
+        $restricted = get_post_meta($post_id, self::$kubist_restrict_metaname, true);
+        wp_nonce_field('kubist_limit_nonce_'.$post_id, 'kubist_limit_nonce');
+        ?>
+        <div class="misc-pub-section misc-pub-section-last">
+            <label><input type="checkbox" value="1" <?php checked($restricted, true, true); ?> name="_kubist_restrict" /><i class="fa fa-lock" aria-hidden="true"></i> <?php _e('Restrict to Kubists!', 'gordokube'); ?></label>
+        </div>
+        <?php
+    }
+    
+    function kubist_restrict_save($post_id){
+        if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+        if (!current_user_can('edit_post', $post_id)) return;
+
+        if ( !isset($_POST['kubist_limit_nonce']) || !wp_verify_nonce($_POST['kubist_limit_nonce'], 'kubist_limit_nonce_'.$post_id) ) {
+            return;
+        }
+
+
+        if (isset($_POST['_kubist_restrict'])) {
+            update_post_meta($post_id, self::$kubist_restrict_metaname, $_POST['_kubist_restrict']);
+        } else {
+            delete_post_meta($post_id, self::$kubist_restrict_metaname);
+        }
+    }
+    
+    function kubist_restrict_query($query){
+        
+        if (!is_admin() && $query->is_main_query()) {
+            
+            $user = wp_get_current_user();
+            $can_read = is_user_logged_in() && ( current_user_can( 'contributor' ) || current_user_can( 'author' ) || current_user_can( 'editor' ) || current_user_can( 'administrator' ) );
+            
+            if ( !$can_read ){
+                $meta_query = $query->get('meta_query');
+                //Add our meta query to the original meta queries
+                $meta_query[] = array(
+                    'key'=>         self::$kubist_restrict_metaname,
+                    'compare' =>    'NOT EXISTS'
+                );
+                $query->set('meta_query',$meta_query);
+                
+            }
+        }
+        
+    }
+    
+    function kubist_restrict_class($classes){
+        $restricted = get_post_meta(get_the_ID(), self::$kubist_restrict_metaname, true);
+        
+        if ( $restricted ){
+            $classes[] = 'kubist-restrict';
+        }
+
+        return $classes;
     }
     
     function home_include_coworkers( $query ) {
