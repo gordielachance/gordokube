@@ -91,8 +91,9 @@ class Gordokube{
         add_filter( 'tribe_get_cost',array($this,"event_get_open_price"),10,3);
         add_action( 'gordo_archives_menu', array($this,'events_add_archive_filters_link') );
 
-        
     }
+
+    
 	function scripts_styles() {
         /*
         Scripts
@@ -271,13 +272,18 @@ class Gordokube{
     Add 'Events' link (The Events Calendar) to the archives menu
     */
     function events_add_archive_filters_link($has_menu){
+        global $wp_query;
 
         if ( $has_menu ) return;
         if ( !class_exists('Tribe__Events__Main') ) return;
         
         $link = get_permalink( get_option( 'page_for_posts' ) );
         $link = add_query_arg(array('post_type'=>'tribe_events'),$link);
-        $is_active = ( get_post_type() == 'tribe_events' );
+        
+        //check only events are queried in the main query
+        $main_post_types = $wp_query->query_vars['post_type'];
+        $is_active = ( !is_array($main_post_types) && ($main_post_types == 'tribe_events'));
+
         $classes = array(
             'cat-item',
             $is_active ? 'current-cat' : null
