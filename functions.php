@@ -273,7 +273,7 @@ class Gordokube{
         if ( $has_menu ) return;
         if ( !class_exists('Tribe__Events__Main') ) return;
         
-        $link = get_permalink( get_option( 'page_for_posts' ) );
+        $link = get_home_url();//get_permalink( get_option( 'page_for_posts' ) );
         $link = add_query_arg(array('post_type'=>'tribe_events'),$link);
         
         //check only events are queried in the main query
