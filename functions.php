@@ -94,6 +94,7 @@ class Gordokube{
         
         //time
         add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3); //update post date = event start date so less confusing
+        add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
         
         //open price
         add_action( 'tribe_events_cost_table', array($this,'event_backend_open_price'), 9 );
@@ -399,6 +400,24 @@ class Gordokube{
             $sidebar_name = 'tribe_events';
         }
         return $sidebar_name;
+    }
+    
+    /*
+    Sort events by event start date, not by post date
+    //TO FIX possible to do even on regular queries where multiple post types are queried ?
+    */
+    
+    function events_sort_by_start_date($query){
+        
+        if( !$query->is_main_query() ) return;
+        
+        if ($query->get('post_type') == 'tribe_events') {
+            $query->set( 'meta_key', '_EventStartDateUTC' );
+            $query->set( 'orderby', 'meta_value_num' );
+            $query->set( 'order', 'DESC' );
+
+        }
+
     }
     
     /*
