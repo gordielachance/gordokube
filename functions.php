@@ -160,10 +160,6 @@ class Gordokube{
         }
         return $query;
     }
-    
-    function events_ignore_pre_get_posts(){
-        remove_action( 'pre_get_posts', array( 'Tribe__Events__Query', 'pre_get_posts' ), 50 );
-    }
 
     function get_hentry_event_icon($icon,$post_id){
         if ( !class_exists( 'Tribe__Events__Main' ) ) return $icon;
