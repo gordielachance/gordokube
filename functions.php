@@ -207,7 +207,7 @@ class Gordokube{
             $can_read = is_user_logged_in() && ( current_user_can( 'contributor' ) || current_user_can( 'author' ) || current_user_can( 'editor' ) || current_user_can( 'administrator' ) );
             
             if ( !$can_read ){
-                $meta_query = $query->get('meta_query');
+                $meta_query = (array)$query->get('meta_query');
                 //Add our meta query to the original meta queries
                 $meta_query[] = array(
                     'key'=>         self::$kubist_restrict_metaname,
