@@ -80,7 +80,10 @@ class Gordokube{
         /*
         Events
         */
-        //TO FIX sort events by start date?
+        
+        //TOFIX TESTING add_filter( 'tribe_events_template', array($this,'events_template'), 10, 2 );
+        add_action( 'parse_query', array($this,'events_parse_query'), 99 );
+
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_event_icon'), 10, 2 );
         //add_filter( 'the_content', array($this,'page_calendar_content')); //TO FIX TO REMOVE? no more used
         add_filter('gordo_get_sidebar', array($this,'single_event_sidebar'));
@@ -89,21 +92,28 @@ class Gordokube{
         add_filter('post_class', array($this,'past_event_post_class') );
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
-        add_action( 'parse_query', array($this,'events_parse_query'), 99 );
+        
         add_action( 'gordo_archives_menu', array($this,'events_add_archive_filters_link') );
         
         //time
+        //TO FIX sort events by start date?
+        /*
         add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3); //update post date = event start date so less confusing
-        add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
+        TOFIX TESTING add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
+        */
         
         //open price
         add_action( 'tribe_events_cost_table', array($this,'event_backend_open_price'), 9 );
         add_action( 'tribe_events_event_save', array($this,'event_save_open_price'), 10, 3 );
         add_filter( 'tribe_get_cost',array($this,"event_get_open_price"),10,3);
-        
-        
-        
 
+    }
+
+    function events_template($file, $template){
+        if ($template=='list.php'){
+            $template = get_index_template();
+        }
+        return $template;
     }
 
     
