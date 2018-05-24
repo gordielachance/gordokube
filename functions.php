@@ -159,6 +159,7 @@ class Gordokube{
             'supports' => array(
                 'title',
                 'editor',
+                'author',
                 'thumbnail'
             ),
             'taxonomies' => array('post_tag' ),
