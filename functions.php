@@ -72,6 +72,7 @@ class Gordokube{
         add_action('init', array($this,'add_kubist_role') );
         add_action('pre_get_posts', array($this,'home_include_coworkers') );
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_coworker_icon'), 10, 2 );
+        add_filter('get_the_excerpt', array($this,'coworkers_excerpt_more') );
         add_action('post_submitbox_misc_actions', array($this,'kubist_restrict_checkbox') );
         add_action('save_post', array($this,'kubist_restrict_save') );
         add_action('pre_get_posts', array($this,'kubist_restrict_query') );
@@ -263,6 +264,22 @@ class Gordokube{
             $icon = '<i class="fa fa-user-circle" aria-hidden="true"></i>';
         }
         return $icon;
+    }
+    
+    /*
+    if there is a "more" tag, 
+    add a "continue reading" link.
+    */
+    function coworkers_excerpt_more($excerpt){
+        global $post;
+        $post_type = get_post_type();
+        if ( $post_type == self::$coworker_post_type ){
+            $has_more_tag = strpos( $post->post_content, '<!--more-->' );
+            if ($has_more_tag){
+                $excerpt .= gordo()->excerpt_more_text();
+            }
+        }
+        return $excerpt;
     }
 
     /*
