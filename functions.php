@@ -76,7 +76,8 @@ class Gordokube{
         add_action('post_submitbox_misc_actions', array($this,'kubist_restrict_checkbox') );
         add_action('save_post', array($this,'kubist_restrict_save') );
         add_action('pre_get_posts', array($this,'kubist_restrict_query') );
-        add_filter('post_class', array($this,'kubist_restrict_class') );
+        add_filter('body_class', array($this,'kubist_restrict_body_class') );
+        add_filter('post_class', array($this,'kubist_restrict_post_class') );
 
         /*
         Events
@@ -211,14 +212,19 @@ class Gordokube{
         }
     }
     
+    static function is_kubist(){
+        $is_kubist = is_user_logged_in() && ( current_user_can( 'contributor' ) || current_user_can( 'author' ) || current_user_can( 'editor' ) || current_user_can( 'administrator' ) );
+        return $is_kubist;
+    }
+    
     function kubist_restrict_query($query){
         
         if (!is_admin() && $query->is_main_query()) {
             
             $user = wp_get_current_user();
-            $can_read = is_user_logged_in() && ( current_user_can( 'contributor' ) || current_user_can( 'author' ) || current_user_can( 'editor' ) || current_user_can( 'administrator' ) );
             
-            if ( !$can_read ){
+            
+            if ( !self::is_kubist() ){
                 $meta_query = $query->get('meta_query');
                 //Add our meta query to the original meta queries
                 $meta_query[] = array(
@@ -232,7 +238,17 @@ class Gordokube{
         
     }
     
-    function kubist_restrict_class($classes){
+    function kubist_restrict_body_class($classes){
+        $restricted = get_post_meta(get_the_ID(), self::$kubist_restrict_metaname, true);
+        
+        if ( self::is_kubist() ){
+            $classes[] = 'is-kubist';
+        }
+
+        return $classes;
+    }
+    
+    function kubist_restrict_post_class($classes){
         $restricted = get_post_meta(get_the_ID(), self::$kubist_restrict_metaname, true);
         
         if ( $restricted ){
