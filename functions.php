@@ -72,15 +72,20 @@ class Gordokube{
         add_action('init', array($this,'add_kubist_role') );
         add_action('pre_get_posts', array($this,'home_include_coworkers') );
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_coworker_icon'), 10, 2 );
+        add_filter('get_the_excerpt', array($this,'coworkers_excerpt_more') );
         add_action('post_submitbox_misc_actions', array($this,'kubist_restrict_checkbox') );
         add_action('save_post', array($this,'kubist_restrict_save') );
         add_action('pre_get_posts', array($this,'kubist_restrict_query') );
-        add_filter('post_class', array($this,'kubist_restrict_class') );
+        add_filter('body_class', array($this,'kubist_restrict_body_class') );
+        add_filter('post_class', array($this,'kubist_restrict_post_class') );
 
         /*
         Events
         */
-        //TO FIX sort events by start date?
+        
+        //TOFIX TESTING add_filter( 'tribe_events_template', array($this,'events_template'), 10, 2 );
+        add_action( 'parse_query', array($this,'events_parse_query'), 99 );
+
         add_filter('gordo_get_hentry_icon', array($this,'get_hentry_event_icon'), 10, 2 );
         //add_filter( 'the_content', array($this,'page_calendar_content')); //TO FIX TO REMOVE? no more used
         add_filter('gordo_get_sidebar', array($this,'single_event_sidebar'));
@@ -89,20 +94,26 @@ class Gordokube{
         add_filter('post_class', array($this,'past_event_post_class') );
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
-        add_action( 'parse_query', array($this,'events_parse_query'), 99 );
         
         //time
+        //TO FIX sort events by start date?
+        /*
         add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3); //update post date = event start date so less confusing
-        add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
+        TOFIX TESTING add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
+        */
         
         //open price
         add_action( 'tribe_events_cost_table', array($this,'event_backend_open_price'), 9 );
         add_action( 'tribe_events_event_save', array($this,'event_save_open_price'), 10, 3 );
         add_filter( 'tribe_get_cost',array($this,"event_get_open_price"),10,3);
-        
-        
-        
 
+    }
+
+    function events_template($file, $template){
+        if ($template=='list.php'){
+            $template = get_index_template();
+        }
+        return $template;
     }
 
     
@@ -147,6 +158,7 @@ class Gordokube{
             'supports' => array(
                 'title',
                 'editor',
+                'author',
                 'thumbnail'
             ),
             'taxonomies' => array('post_tag' ),
@@ -198,15 +210,19 @@ class Gordokube{
         }
     }
     
+    static function is_kubist(){
+        $is_kubist = is_user_logged_in() && ( current_user_can( 'contributor' ) || current_user_can( 'author' ) || current_user_can( 'editor' ) || current_user_can( 'administrator' ) );
+        return $is_kubist;
+    }
+    
     function kubist_restrict_query($query){
         
         if (!is_admin() && $query->is_main_query()) {
             
             $user = wp_get_current_user();
-            $can_read = is_user_logged_in() && ( current_user_can( 'contributor' ) || current_user_can( 'author' ) || current_user_can( 'editor' ) || current_user_can( 'administrator' ) );
-            
-            if ( !$can_read ){
-                $meta_query = (array)$query->get('meta_query');
+
+            if ( !self::is_kubist() ){
+                $meta_query = $query->get('meta_query');
                 //Add our meta query to the original meta queries
                 $meta_query[] = array(
                     'key'=>         self::$kubist_restrict_metaname,
@@ -219,7 +235,17 @@ class Gordokube{
         
     }
     
-    function kubist_restrict_class($classes){
+    function kubist_restrict_body_class($classes){
+        $restricted = get_post_meta(get_the_ID(), self::$kubist_restrict_metaname, true);
+        
+        if ( self::is_kubist() ){
+            $classes[] = 'is-kubist';
+        }
+
+        return $classes;
+    }
+    
+    function kubist_restrict_post_class($classes){
         $restricted = get_post_meta(get_the_ID(), self::$kubist_restrict_metaname, true);
         
         if ( $restricted ){
@@ -252,6 +278,22 @@ class Gordokube{
             $icon = '<i class="fa fa-user-circle" aria-hidden="true"></i>';
         }
         return $icon;
+    }
+    
+    /*
+    if there is a "more" tag, 
+    add a "continue reading" link.
+    */
+    function coworkers_excerpt_more($excerpt){
+        global $post;
+        $post_type = get_post_type();
+        if ( $post_type == self::$coworker_post_type ){
+            $has_more_tag = strpos( $post->post_content, '<!--more-->' );
+            if ($has_more_tag){
+                $excerpt .= gordo()->excerpt_more_text();
+            }
+        }
+        return $excerpt;
     }
 
     /*
