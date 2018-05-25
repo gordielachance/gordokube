@@ -90,7 +90,6 @@ class Gordokube{
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
         add_action( 'parse_query', array($this,'events_parse_query'), 99 );
-        add_action( 'gordo_archives_menu', array($this,'events_add_archive_filters_link') );
         
         //time
         add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3); //update post date = event start date so less confusing
@@ -339,32 +338,6 @@ class Gordokube{
             
         }
         return $cost;
-    }
-    
-    /*
-    Add 'Events' link (The Events Calendar) to the archives menu
-    */
-    function events_add_archive_filters_link($has_menu){
-        global $wp_query;
-
-        if ( $has_menu ) return;
-        if ( !class_exists('Tribe__Events__Main') ) return;
-        
-        $link = get_home_url();//get_permalink( get_option( 'page_for_posts' ) );
-        $link = add_query_arg(array('post_type'=>'tribe_events'),$link);
-        
-        //check only events are queried in the main query
-        $main_post_types = $wp_query->query_vars['post_type'];
-        $is_active = ( !is_array($main_post_types) && ($main_post_types == 'tribe_events'));
-
-        $classes = array(
-            'cat-item',
-            $is_active ? 'current-cat' : null
-        );
-        $classes = array_filter($classes);
-        $classes_str = $classes ? sprintf(' class="%s"',implode(' ',$classes)) : null;
-        
-        printf('<li %s><a href="%s">%s</a></li>',$classes_str,$link,__('Events', 'the-events-calendar'));
     }
 
     /*
