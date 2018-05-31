@@ -97,9 +97,10 @@ class Gordokube{
         
         //time
         //TO FIX sort events by start date?
+        add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
         /*
         add_filter('get_the_time', array($this,'single_event_hentry_time'), 10, 3); //update post date = event start date so less confusing
-        TOFIX TESTING add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
+        TOFIX TESTING 
         */
         
         //open price
@@ -427,10 +428,10 @@ class Gordokube{
         if( !$query->is_main_query() ) return;
         
         if ($query->get('post_type') == 'tribe_events') {
-            $query->set( 'meta_key', '_EventStartDateUTC' );
-            $query->set( 'orderby', 'meta_value_num' );
+            //order by startdate from newest to oldest
+            $query->set( 'meta_key', '_EventStartDate' );
+            $query->set( 'orderby', '_EventStartDate' );
             $query->set( 'order', 'DESC' );
-
         }
 
     }
