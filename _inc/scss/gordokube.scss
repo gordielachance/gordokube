@@ -72,12 +72,13 @@ body.home{
 }
 
 #post-69,#post-318{ //"coworking - location"
-
+    .post-content{
+        padding-top:0; 
+    }
     .loopsns-loop{
         &.loopsns-gallery{
             width:120%;
             left:-10%;
-            margin-top: -10%;
             .hentry{
                 height:350px;
                 figcaption{
@@ -129,7 +130,7 @@ a.action-button{
     }
 }
 
-//KUBE COLOR SCHEME
+//Kube color scheme
 .bg-page{
     background-color:#fff2f2;
 }
@@ -152,5 +153,15 @@ body{
     }
     #theme-credits{
         display:none;
+    }
+}
+
+//ShareDaddy
+.sharedaddy {
+    .loopsns-loop &{
+        display:none;
+    }
+    .sidebar &{
+        text-align:center;
     }
 }
