@@ -517,3 +517,16 @@ function gordokube() {
 }
 
 gordokube();
+
+/*
+Temporary hack to fix description displayed in og:meta with the plugin Open Graph for Facebook, Google+ and Twitter Card Tags
+*/
+
+function hackfix_no_pwd_desc($desc){
+    if ( post_password_required() ){
+	$desc = __("This content is password protected.");
+    }
+    return $desc;
+}
+
+add_filter('fb_og_desc','hackfix_no_pwd_desc');
