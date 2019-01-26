@@ -95,6 +95,8 @@ class Gordokube{
         add_filter('the_content', array($this,'past_single_event_notice') );
         add_filter('the_excerpt', array($this,'single_event_excerpt_schedule') );
         
+        add_action( 'loop_start', array($this,'remove_jetpack_share') );
+        
         //time
         //TO FIX sort events by start date?
         add_action('pre_get_posts', array($this,'events_sort_by_start_date') ); //when events query, sort by start date
@@ -496,6 +498,17 @@ class Gordokube{
             $excerpt = sprintf('<span class="tribe-event-duration gordo-notice">%s</span>',tribe_events_event_schedule_details()) . $excerpt;
         }
         return $excerpt;
+    }
+    
+    //remove default sharing buttons for single events
+    function remove_jetpack_share(){
+        if ( !is_singular(TribeEvents::POSTTYPE)  ) return;
+        
+        remove_filter( 'the_content', 'sharing_display', 19 );
+        remove_filter( 'the_excerpt', 'sharing_display', 19 );
+        if ( class_exists( 'Jetpack_Likes' ) ) {
+            remove_filter( 'the_content', array( Jetpack_Likes::init(), 'post_likes' ), 30, 1 );
+        }
     }
 }
 
