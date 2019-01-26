@@ -269,7 +269,7 @@ class Gordokube{
     function get_hentry_event_icon($icon,$post_id){
         if ( !class_exists( 'Tribe__Events__Main' ) ) return $icon;
         $post_type = get_post_type($post_id);
-        if ($post_type == TribeEvents::POSTTYPE){
+        if ($post_type == Tribe__Events__Main::POSTTYPE){
             $icon = '<i class="fa fa-calendar-check-o" aria-hidden="true"></i>';
         }
         return $icon;
@@ -309,7 +309,7 @@ class Gordokube{
         
         if( !$query->is_main_query() ) return;
         
-        if ($query->get('post_type') == TribeEvents::POSTTYPE) {
+        if ($query->get('post_type') == Tribe__Events__Main::POSTTYPE) {
 
             if ( $query->is_singular() ){
                 // will abord most of the plugin's function when displaying the single event; which do way too much stuff when displaying the template
@@ -414,7 +414,7 @@ class Gordokube{
     }
     
     function single_event_sidebar($sidebar_name){
-        if ( is_singular(TribeEvents::POSTTYPE) ){
+        if ( is_singular(Tribe__Events__Main::POSTTYPE) ){
             $sidebar_name = 'tribe_events';
         }
         return $sidebar_name;
@@ -429,7 +429,7 @@ class Gordokube{
         
         if( !$query->is_main_query() ) return;
         
-        if ($query->get('post_type') == TribeEvents::POSTTYPE) {
+        if ($query->get('post_type') == Tribe__Events__Main::POSTTYPE) {
             //order by startdate from newest to oldest
             $query->set( 'meta_key', '_EventStartDate' );
             $query->set( 'orderby', '_EventStartDate' );
@@ -444,7 +444,7 @@ class Gordokube{
     function single_event_hentry_time($the_time, $d, $post){
         if ( class_exists( 'Tribe__Events__Main' ) ) {
             $post_type = get_post_type($post);
-            if ($post_type == TribeEvents::POSTTYPE){
+            if ($post_type == Tribe__Events__Main::POSTTYPE){
                 $the_time = tribe_get_start_date( $post, false, $d );
             }
         }
@@ -456,7 +456,7 @@ class Gordokube{
         
         if ( class_exists( 'Tribe__Events__Main' ) ) {
             $post_type = get_post_type($post);
-            if ($post_type == TribeEvents::POSTTYPE){
+            if ($post_type == Tribe__Events__Main::POSTTYPE){
                 return tribe_is_past_event();
             }
         }
@@ -465,7 +465,7 @@ class Gordokube{
     
     function events_body_classes($classes){
         $post_type = get_post_type();
-        if ( $post_type == TribeEvents::POSTTYPE ){
+        if ( $post_type == Tribe__Events__Main::POSTTYPE ){
             if ( !is_single() ){
                 $classes[] = "archive";
             }
@@ -477,7 +477,7 @@ class Gordokube{
     function past_event_post_class($classes){
         $post_type = get_post_type();
         
-        if ( ($post_type == TribeEvents::POSTTYPE) && $this->is_past_event() ){
+        if ( ($post_type == Tribe__Events__Main::POSTTYPE) && $this->is_past_event() ){
             $classes[] = 'tribe-events-past';
         }
 
@@ -485,7 +485,7 @@ class Gordokube{
     }
     
     function past_single_event_notice($content){
-        if ( is_singular(TribeEvents::POSTTYPE) && $this->is_past_event() ){
+        if ( is_singular(Tribe__Events__Main::POSTTYPE) && $this->is_past_event() ){
             $notice = '<p class="gordo-notice">Cet évènement est passé.</p>';
             return $notice . $content;
         }
@@ -494,7 +494,7 @@ class Gordokube{
     }
     function single_event_excerpt_schedule($excerpt){
         $post_type = get_post_type();
-        if ($post_type == TribeEvents::POSTTYPE){
+        if ($post_type == Tribe__Events__Main::POSTTYPE){
             $excerpt = sprintf('<span class="tribe-event-duration gordo-notice">%s</span>',tribe_events_event_schedule_details()) . $excerpt;
         }
         return $excerpt;
@@ -502,7 +502,7 @@ class Gordokube{
     
     //remove default sharing buttons for single events
     function remove_jetpack_share(){
-        if ( !is_singular(TribeEvents::POSTTYPE)  ) return;
+        if ( !is_singular(Tribe__Events__Main::POSTTYPE)  ) return;
         
         remove_filter( 'the_content', 'sharing_display', 19 );
         remove_filter( 'the_excerpt', 'sharing_display', 19 );
