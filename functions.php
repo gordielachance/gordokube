@@ -225,7 +225,7 @@ class Gordokube{
             $user = wp_get_current_user();
 
             if ( !self::is_kubist() ){
-                $meta_query = $query->get('meta_query');
+                $meta_query = $query->get('meta_query') ? $query->get('meta_query') : array();
                 //Add our meta query to the original meta queries
                 $meta_query[] = array(
                     'key'=>         self::$kubist_restrict_metaname,
