@@ -306,6 +306,8 @@ class Gordokube{
     */
     
     function events_parse_query($query){
+	  
+	  	if ( !class_exists( 'Tribe__Events__Main' ) ) return;
         
         if( !$query->is_main_query() ) return;
         
@@ -412,9 +414,9 @@ class Gordokube{
         }
         return $content;
     }
-    
+  
     function single_event_sidebar($sidebar_name){
-        if ( is_singular(Tribe__Events__Main::POSTTYPE) ){
+        if ( class_exists( 'Tribe__Events__Main' ) && is_singular(Tribe__Events__Main::POSTTYPE) ){
             $sidebar_name = 'tribe_events';
         }
         return $sidebar_name;
@@ -427,6 +429,7 @@ class Gordokube{
     
     function events_sort_by_start_date($query){
         
+	  	if ( !class_exists( 'Tribe__Events__Main' ) ) return;
         if( !$query->is_main_query() ) return;
         
         if ($query->get('post_type') == Tribe__Events__Main::POSTTYPE) {
@@ -465,7 +468,7 @@ class Gordokube{
     
     function events_body_classes($classes){
         $post_type = get_post_type();
-        if ( $post_type == Tribe__Events__Main::POSTTYPE ){
+        if ( class_exists( 'Tribe__Events__Main' ) && ( $post_type == Tribe__Events__Main::POSTTYPE) ){
             if ( !is_single() ){
                 $classes[] = "archive";
             }
@@ -477,7 +480,7 @@ class Gordokube{
     function past_event_post_class($classes){
         $post_type = get_post_type();
         
-        if ( ($post_type == Tribe__Events__Main::POSTTYPE) && $this->is_past_event() ){
+        if ( class_exists( 'Tribe__Events__Main' ) && ($post_type == Tribe__Events__Main::POSTTYPE) && $this->is_past_event() ){
             $classes[] = 'tribe-events-past';
         }
 
@@ -485,7 +488,7 @@ class Gordokube{
     }
     
     function past_single_event_notice($content){
-        if ( is_singular(Tribe__Events__Main::POSTTYPE) && $this->is_past_event() ){
+        if ( class_exists( 'Tribe__Events__Main' ) && is_singular(Tribe__Events__Main::POSTTYPE) && $this->is_past_event() ){
             $notice = '<p class="gordo-notice">Cet évènement est passé.</p>';
             return $notice . $content;
         }
@@ -494,7 +497,7 @@ class Gordokube{
     }
     function single_event_excerpt_schedule($excerpt){
         $post_type = get_post_type();
-        if ($post_type == Tribe__Events__Main::POSTTYPE){
+        if ( class_exists( 'Tribe__Events__Main' ) && ($post_type == Tribe__Events__Main::POSTTYPE) ){
             $excerpt = sprintf('<span class="tribe-event-duration gordo-notice">%s</span>',tribe_events_event_schedule_details()) . $excerpt;
         }
         return $excerpt;
@@ -502,7 +505,7 @@ class Gordokube{
     
     //remove default sharing buttons for single events
     function remove_jetpack_share(){
-        if ( !is_singular(Tribe__Events__Main::POSTTYPE)  ) return;
+        if ( class_exists( 'Tribe__Events__Main' ) && !is_singular(Tribe__Events__Main::POSTTYPE)  ) return;
         
         remove_filter( 'the_content', 'sharing_display', 19 );
         remove_filter( 'the_excerpt', 'sharing_display', 19 );
